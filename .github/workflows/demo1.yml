@@ -1,0 +1,22 @@
+name: Events Demo 1
+on:
+  pull_request:
+    # types: [opened, edited] # Can be an array like this or a list
+    types:
+      - opened
+      - edited
+  workflow_dispatch: # this has to follow the syntax regardless of having no activity types
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output event data
+        run: echo "${{toJSON(github.event)}}"
+      - name: Get code
+        uses: actions/checkout@v7
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying..."
