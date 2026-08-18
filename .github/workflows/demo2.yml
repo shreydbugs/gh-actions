@@ -6,12 +6,9 @@ on:
     branches:
       - main
       - test-* # exclude slashes from name
-    branches-ignore:
       - deployment/** # include slashes in name
     paths:
       - index.html
-    paths-ignore:
-      - package.json
 
 jobs:
   deploy:
