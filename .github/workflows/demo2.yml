@@ -1,0 +1,27 @@
+name: Events Demo 2
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+      - test-* # exclude slashes from name
+    branches-ignore:
+      - deployment/** # include slashes in name
+    paths:
+      - index.html
+    paths-ignore:
+      - package.json
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v7
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: deploy
+        run: echo "Deploying..."
